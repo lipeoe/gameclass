@@ -20,7 +20,6 @@ Você pode dominar o sistema escolhendo um de dois poderosos times:
 - **Cobranças de Pênalti Focadas:** Durante um pênalti, o gramado esvazia! Apenas você e o goleiro adversário se encaram de frente (Câmera Clássica). Escolha o canto com `A` ou `D` e chuta com `Espaço`. O goleiro tem 85% de chance de fazer uma defesa espetacular, mas nós sabemos que... bem, coisas podem acontecer com ele depois.
 - **Bola ao Chão Tático:** Após lances de simulação ou repescagem do VAR, a bola reintegra à frente do lance. Enquanto você não tocar na bola, os adversários ficarão **congelados de medo** numa distância segura. 
 - **Gols Anulados Automáticos:** Gols contra? A CBmáFia anula e empurra o time adversário de volta pro campo de defesa.
-- **Física Implacável:** Bola perfeitamente redonda, passe a laser para o companheiro e sem bugs de atravessar o chão (anti-clipping ativado!). E as redes laterais agora blindam as balizas contra gols impossíveis "por fora".
 
 ## 🛠️ Tecnologias Utilizadas
 - **HTML5, CSS3, e Vanilla JavaScript (ES6)**
@@ -35,4 +34,3 @@ Você pode dominar o sistema escolhendo um de dois poderosos times:
 ## 🤝 Máfia Contribuições
 Sinta-se livre para debugar o sistema... mas cuidado com o tribunal esportivo.
 
-> _"CBmáFia: A única máfia que você pode torcer (ou não)."_
