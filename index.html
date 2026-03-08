@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBmáFia - O Simulador de Justiça Divina</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <!-- Canvas do jogo será injetado aqui -->
+
+        <!-- Menu Inicial -->
+        <div id="main-menu" class="overlay active">
+            <h1 class="cbf-title">
+                <span class="cbf-c">C</span><span class="cbf-b">B</span>má<span class="cbf-f">F</span>ia
+            </h1>
+            <p id="satire-text" class="subtitle">A Justiça Divina é Verde e Amarela</p>
+            <div class="menu-options">
+                <button id="btn-varmengo" class="menu-btn team-btn fluminense">MODO VARMENGO<br><span id="varmengo-satire">O Apito Amigo Tradicional</span></button>
+                <button id="btn-varmeiras" class="menu-btn team-btn palmeiras">MODO VARMEIRAS<br><span id="varmeiras-satire">O Pacto com o VAR</span></button>
+            </div>
+        </div>
+
+        <!-- Interface do VAR -->
+        <div id="var-overlay" class="overlay hidden">
+            <div class="scanlines"></div>
+            <div class="var-content goal-content">
+                <div class="var-header">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+                        class="var-logo spinning" alt="VAR Logo">
+                    <span>ANALISANDO JUSTIÇA...</span>
+                </div>
+                <div class="var-monitor goal-bg">
+                    <h1 id="var-text-main" class="goal-text">ANALISANDO PÊNALTI...</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Gol -->
+        <div id="goal-overlay" class="overlay hidden">
+            <div class="scanlines"></div>
+            <div class="var-content goal-content">
+                <div class="var-header">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+                        class="var-logo spinning" alt="Logo">
+                    <span>JUSTIÇA CONFIRMADA</span>
+                </div>
+                <div class="var-monitor goal-bg">
+                    <h1 class="goal-text" id="goal-msg">GOOOOOL DO FLAMENGO!</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Gol Anulado -->
+        <div id="annulled-overlay" class="overlay hidden">
+            <div class="scanlines"></div>
+            <div class="var-content goal-content" style="border-color: #555;">
+                <div class="var-header" style="color: #fff; background: #333; justify-content: center;">
+                    <span>SISTEMA DETECTOU ERRO</span>
+                </div>
+                <div class="var-monitor goal-bg" style="background: linear-gradient(45deg, #222, #000);">
+                    <h1 class="goal-text" style="color: #ff4444; font-size: 1.5rem;">GOL ANULADO!<br>CONTRA O SISTEMA</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Defesa Ilegal -->
+        <div id="defense-overlay" class="overlay hidden">
+            <div class="scanlines"></div>
+            <div class="var-content goal-content" style="border-color: #e74c3c;">
+                <div class="var-header" style="color: #e74c3c;">
+                    <span>DEFESA DETECTADA!</span>
+                </div>
+                <div class="var-monitor goal-bg" style="background: linear-gradient(45deg, #e74c3c, #000);">
+                    <h1 class="goal-text">ISSO É ILEGAL!<br>DEFESA PROIBIDA</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Cartão Vermelho (Melhorada) -->
+        <div id="redcard-overlay" class="overlay hidden">
+            <div class="scanlines"></div>
+            <div class="var-content goal-content" style="border-color: #ff0000; box-shadow: 0 0 50px red;">
+                <div class="var-header" style="color: #fff; background: #000; justify-content: center; padding: 10px; border-bottom: 4px solid red;">
+                    <span>EXPULSÃO POR JUSTIÇA</span>
+                </div>
+                <div class="var-monitor goal-bg" style="background: #111; flex-direction: column;">
+                    <div style="width: 100px; height: 150px; background: red; border: 4px solid white; box-shadow: 0 0 30px red; margin-bottom: 20px;"></div>
+                    <h1 class="goal-text" style="font-size: 1.2rem; color: white;">BANIDO DO SISTEMA</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Cartão Amarelo -->
+        <div id="yellowcard-overlay" class="overlay hidden">
+            <div class="scanlines"></div>
+            <div class="var-content goal-content" style="border-color: #ffd700;">
+                <div class="var-header" style="color: #000; background: #ffd700; justify-content: center; padding: 10px;">
+                    <span>ADVERTÊNCIA DO SISTEMA</span>
+                </div>
+                <div class="var-monitor goal-bg" style="background: #111; flex-direction: column;">
+                    <div style="width: 100px; height: 150px; background: #ffd700; border: 4px solid white; box-shadow: 0 0 30px yellow; margin-bottom: 20px;"></div>
+                    <h1 class="goal-text" style="font-size: 1.2rem; color: #ffd700;">JOGADOR PENDURADO</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Vitória W.O. / Campeão -->
+        <div id="victory-overlay" class="overlay hidden">
+            <div class="scanlines"></div>
+            <div class="var-content goal-content" style="border-color: #f1c40f; box-shadow: 0 0 50px gold;">
+                <div class="var-header" style="color: #000; background: #f1c40f; justify-content: center; padding: 10px;">
+                    <span>CAMPEÃO DO SISTEMA</span>
+                </div>
+                <div class="var-monitor goal-bg" style="background: radial-gradient(circle, #f1c40f 0%, #000 100%); flex-direction: column;">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png"
+                        class="var-logo spinning" style="width: 80px; height: 80px; margin-bottom: 20px;">
+                    <h1 class="goal-text" style="font-size: 2rem; color: #fff; text-shadow: 4px 4px #000;">VITÓRIA POR W.O.</h1>
+                    <p style="color: #fff; margin-top: 20px; font-size: 0.8rem;">O adversário desistiu do sistema!</p>
+                </div>
+                <button onclick="location.reload()" class="menu-btn" style="margin-top: 20px; border-color: gold;">VOLTAR AO MENU</button>
+            </div>
+        </div>
+
+        <!-- HUD -->
+        <div id="hud" class="hidden">
+            <div class="score-board">
+                <div class="team score-primary"><span id="team-name">FLA</span> <span id="score-fla">99</span></div>
+                <div class="timer" id="match-timer">02:00</div>
+                <div class="team score-secondary">ADV <span id="score-adv">0</span></div>
+            </div>
+            <div class="controls-hint-container">
+                <div class="controls-hint" id="controls-hint">
+                    WASD: Mover | K: Chutar | L: Passar
+                </div>
+                <div class="controls-hint var-hint hidden" id="var-hint">
+                    [ESPAÇO] CAVAR PÊNALTI
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Pausa/Sair -->
+        <div id="pause-menu" class="overlay hidden">
+            <h2>PAUSADO</h2>
+            <button id="btn-resume" class="menu-btn">CONTINUAR</button>
+            <button id="btn-quit" class="menu-btn">SAIR</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

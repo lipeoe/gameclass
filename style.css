@@ -1,0 +1,306 @@
+:root {
+    --fla-red: #d30000;
+    --fla-black: #000000;
+    --pal-green: #006437;
+    --pal-white: #ffffff;
+    --cbf-green: #009c3b;
+    --cbf-yellow: #ffdf00;
+    --cbf-blue: #002776;
+    --vibrant-green: #2ecc71;
+    --glow-gold: #f1c40f;
+    --crt-blue: rgba(10, 10, 15, 0.95);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #111;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Overlays Genéricos */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.85);
+    transition: opacity 0.3s;
+}
+
+.hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Menu Principal */
+#main-menu {
+    background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
+}
+
+.cbf-title {
+    font-size: 5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+}
+
+.cbf-c { color: var(--cbf-green); }
+.cbf-b { color: var(--cbf-yellow); }
+.cbf-f { color: var(--cbf-blue); }
+
+.menu-btn.palmeiras:hover {
+    background: var(--pal-green);
+    border-color: var(--pal-white);
+}
+
+.menu-btn.fluminense:hover {
+    background: var(--fla-red);
+    border-color: var(--glow-gold);
+}
+
+.subtitle {
+    margin-top: 1rem;
+    color: var(--glow-gold);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+}
+
+.menu-options {
+    margin-top: 3rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.menu-btn {
+    padding: 1.5rem 2rem;
+    background: #222;
+    border: 4px solid white;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.menu-btn span {
+    font-size: 0.6rem;
+    opacity: 0.7;
+}
+
+.menu-btn:hover {
+    transform: scale(1.1);
+    background: var(--fla-red);
+    border-color: var(--glow-gold);
+}
+
+/* VAR Interface */
+#var-overlay {
+    background: var(--crt-blue);
+}
+
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom,
+            rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.15) 50%);
+    background-size: 100% 4px;
+    z-index: 11;
+    pointer-events: none;
+}
+
+.var-content {
+    position: relative;
+    z-index: 12;
+    width: 80%;
+    height: 70%;
+    background: #000;
+    border: 8px solid #444;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.var-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--fla-red);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.var-monitor {
+    flex: 1;
+    border: 4px solid #222;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    /* Ver o canvas atrás */
+}
+
+.controls-hint-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.controls-hint {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.var-hint {
+    background: #ffdf00;
+    color: #000;
+    font-weight: bold;
+    border-color: #000;
+    box-shadow: 0 0 15px #ffdf00;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); box-shadow: 0 0 10px #ffdf00; }
+    to { transform: scale(1.1); box-shadow: 0 0 25px #ffdf00; }
+}
+
+.replay-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: red;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    animation: flash 0.5s infinite;
+}
+
+.goal-bg {
+    background: linear-gradient(45deg, #d30000, #000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.goal-text {
+    font-size: 2.5rem;
+    color: var(--glow-gold);
+    text-align: center;
+    text-shadow: 4px 4px #000;
+    animation: flash 0.3s infinite;
+}
+
+.goal-content {
+    border-color: var(--glow-gold);
+}
+
+/* Animations - Glitch removed as per request */
+@keyframes flash {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.spinning {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.score-board {
+    display: flex;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border: 3px solid white;
+    gap: 15px;
+}
+
+.timer {
+    color: #fff;
+}
+
+.team.score-primary {
+    color: var(--fla-red);
+}
+
+.team.score-secondary {
+    color: #ccc;
+}
+
+.controls-hint {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: white;
+    text-shadow: 2px 2px #000;
+}
